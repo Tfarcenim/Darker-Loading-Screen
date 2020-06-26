@@ -9,14 +9,16 @@ public class Hooks {
 	private static ForgeConfigSpec.ConfigValue<String> main_background_color;
 	private static ForgeConfigSpec.ConfigValue<String> progress_start_color;
 	private static ForgeConfigSpec.ConfigValue<String> progress_end_color;
+	private static ForgeConfigSpec.ConfigValue<String> logo_color;
 
-	public static int backColor = 0, progStartColor = 0, progEndColor = 0;
+	public static int backColor = 0, progStartColor = 0, progEndColor = 0,logoColor = 0xff0000;
 
 	public Hooks(ForgeConfigSpec.Builder builder) {
 		builder.push("general");
 		main_background_color = builder.define("main_background_color","#2B2B2B");
 		progress_start_color = builder.define("progress_start_color","#FF0000");
 		progress_end_color = builder.define("progress_end_color","#00FF00");
+		logo_color = builder.define("logo_color","#FF0000");
 		builder.pop();
 	}
 
@@ -24,6 +26,7 @@ public class Hooks {
 		backColor = Integer.decode(main_background_color.get()) | 0xff000000;
 		progStartColor = Integer.decode(progress_start_color.get()) | 0xff000000;
 		progEndColor = Integer.decode(progress_end_color.get()) | 0xff000000;
+		logoColor = Integer.decode(logo_color.get()) | 0xff000000;
 	}
 
 	public static int getProgressColor(float progress){

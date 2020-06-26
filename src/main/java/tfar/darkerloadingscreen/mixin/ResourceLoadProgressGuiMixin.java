@@ -37,8 +37,10 @@ public class ResourceLoadProgressGuiMixin {
 	}
 
 	@ModifyArgs(method = "func_230430_a_",at = @At(value = "INVOKE",target = "Lcom/mojang/blaze3d/systems/RenderSystem;color4f(FFFF)V"))
-	private void tint(Args args){
-		args.set(1,0f);
-		args.set(2,0f);
+	private void tintLogo(Args args){
+		float r = (Hooks.logoColor >> 16 & 0xff)/255f;
+		float g = (Hooks.logoColor >> 8 & 0xff)/255f;
+		float b = (Hooks.logoColor & 0xff)/255f;
+		args.setAll(r,g,b,args.get(3));
 	}
 }
