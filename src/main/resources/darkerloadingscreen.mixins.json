@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "tfar.darkerloadingscreen.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "darkerloadingscreen.refmap.json",
+  "mixins": [
+    "ResourceLoadProgressGuiMixin",
+    "EarlyLoaderGUIMixin",
+    "ConfigTrackerAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
