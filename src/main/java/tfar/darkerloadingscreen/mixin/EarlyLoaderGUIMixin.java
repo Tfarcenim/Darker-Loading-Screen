@@ -13,9 +13,9 @@ public class EarlyLoaderGUIMixin {
 	//red green blue alpha
 	@ModifyArgs(method = "renderTick", remap = false, at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;clearColor(FFFF)V"))
 	private void setBackgroundColor(Args args) {
-		float r = (Hooks.backColor >> 16 & 0xff)/255f;
-		float g = (Hooks.backColor >> 8 & 0xff)/255f;
-		float b = (Hooks.backColor & 0xff)/255f;
+		float r = (Hooks.backgroundColor >> 16 & 0xff)/255f;
+		float g = (Hooks.backgroundColor >> 8 & 0xff)/255f;
+		float b = (Hooks.backgroundColor & 0xff)/255f;
 		args.setAll(r,g,b,args.get(3));
 	}
 }

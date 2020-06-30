@@ -1,14 +1,15 @@
 package tfar.darkerloadingscreen.mixin;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.ResourceLoadProgressGui;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import tfar.darkerloadingscreen.Hooks;
@@ -24,7 +25,7 @@ public class ResourceLoadProgressGuiMixin {
 		ci.cancel();
 		int length = MathHelper.ceil((maxX - minX - 1) * this.progress);
 		AbstractGui.func_238467_a_(stack,minX - 1, minY - 1, maxX + 1, maxY + 1,Hooks.getBarBackgroundColor(progress));
-		AbstractGui.func_238467_a_(stack,minX, minY, maxX, maxY, Hooks.backColor);
+		AbstractGui.func_238467_a_(stack,minX, minY, maxX, maxY, Hooks.backgroundColor);
 		AbstractGui.func_238467_a_(stack,minX + 1, minY + 1, minX + length, maxY - 1, Hooks.getProgressColor(progress));
 	}
 
@@ -33,7 +34,7 @@ public class ResourceLoadProgressGuiMixin {
 					at = @At(value = "INVOKE",
 									target = "Lnet/minecraft/client/gui/ResourceLoadProgressGui;func_238467_a_(Lcom/mojang/blaze3d/matrix/MatrixStack;IIIII)V"),index = 5)
 	private int backgroundColor(int old){
-		return Hooks.backColor & 0x00ffffff;//remove alpha
+		return Hooks.backgroundColor | old << 24;
 	}
 
 	@ModifyArgs(method = "func_230430_a_",at = @At(value = "INVOKE",target = "Lcom/mojang/blaze3d/systems/RenderSystem;color4f(FFFF)V"))

@@ -11,7 +11,7 @@ public class Hooks {
 	private static ForgeConfigSpec.ConfigValue<String> progress_end_color;
 	private static ForgeConfigSpec.ConfigValue<String> logo_color;
 
-	public static int backColor = 0, progStartColor = 0, progEndColor = 0,logoColor = 0xff0000;
+	public static int backgroundColor = 0, progStartColor = 0, progEndColor = 0,logoColor = 0xff0000;
 
 	public Hooks(ForgeConfigSpec.Builder builder) {
 		builder.push("general");
@@ -23,7 +23,7 @@ public class Hooks {
 	}
 
 	public static void parse() {
-		backColor = Integer.decode(main_background_color.get()) | 0xff000000;
+		backgroundColor = Integer.decode(main_background_color.get()) | 0xff000000;
 		progStartColor = Integer.decode(progress_start_color.get()) | 0xff000000;
 		progEndColor = Integer.decode(progress_end_color.get()) | 0xff000000;
 		logoColor = Integer.decode(logo_color.get()) | 0xff000000;
