@@ -25,11 +25,11 @@ public class DarkerLoadingScreen
         ((ConfigTrackerAccessor)configTracker).getConfigSets().get(ModConfig.Type.CLIENT)
                 .stream().filter(modConfig -> modConfig.getModId().equals(MODID)).findFirst()
                 .ifPresent(modConfig -> ((ConfigTrackerAccessor)configTracker)
-                        .openConfig1(modConfig, FMLPaths.CONFIGDIR.get()));
+                        .$openConfig(modConfig, FMLPaths.CONFIGDIR.get()));
     }
 
     private void setup(final ModConfig.ModConfigEvent event) {
-        if (event.getConfig().getModId().equals(MODID)){
+        if (event.getConfig().getModId().equals(MODID)) {
             Hooks.parse();
         }
     }

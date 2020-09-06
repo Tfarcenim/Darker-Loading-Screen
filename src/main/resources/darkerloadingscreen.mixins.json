@@ -4,9 +4,11 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "darkerloadingscreen.refmap.json",
   "mixins": [
-    "ResourceLoadProgressGuiMixin",
-    "EarlyLoaderGUIMixin",
     "ConfigTrackerAccessor"
+  ],
+  "client": [
+    "ResourceLoadProgressGuiMixin",
+    "EarlyLoaderGUIMixin"
   ],
   "injectors": {
     "defaultRequire": 1

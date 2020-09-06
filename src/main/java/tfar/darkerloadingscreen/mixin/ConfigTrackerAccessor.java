@@ -14,7 +14,7 @@ import java.util.Set;
 public interface ConfigTrackerAccessor {
 
 	@Invoker("openConfig")
-	void openConfig1(final ModConfig config, final Path configBasePath);
+	void $openConfig(final ModConfig config, final Path configBasePath);
 
 	@Accessor
 	EnumMap<ModConfig.Type, Set<ModConfig>> getConfigSets();

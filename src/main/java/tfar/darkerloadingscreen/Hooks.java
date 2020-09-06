@@ -46,7 +46,7 @@ public class Hooks {
 		return 0xff000000| r | g | b;
 	}
 
-	public static int getBarBackgroundColor(float progress){
+	public static int getBarBackgroundColor(float progress) {
 
 		float a = 1 - progress;
 

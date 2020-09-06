@@ -24,20 +24,20 @@ public class ResourceLoadProgressGuiMixin {
 	private void customBar(MatrixStack stack,int minX, int minY, int maxX, int maxY, float p_228181_5_, CallbackInfo ci){
 		ci.cancel();
 		int length = MathHelper.ceil((maxX - minX - 1) * this.progress);
-		AbstractGui.func_238467_a_(stack,minX - 1, minY - 1, maxX + 1, maxY + 1,Hooks.getBarBackgroundColor(progress));
-		AbstractGui.func_238467_a_(stack,minX, minY, maxX, maxY, Hooks.backgroundColor);
-		AbstractGui.func_238467_a_(stack,minX + 1, minY + 1, minX + length, maxY - 1, Hooks.getProgressColor(progress));
+		AbstractGui.fill(stack,minX - 1, minY - 1, maxX + 1, maxY + 1,Hooks.getBarBackgroundColor(progress));
+		AbstractGui.fill(stack,minX, minY, maxX, maxY, Hooks.backgroundColor);
+		AbstractGui.fill(stack,minX + 1, minY + 1, minX + length, maxY - 1, Hooks.getProgressColor(progress));
 	}
 
 	//white by default
-	@ModifyArg(method = "func_230430_a_",remap = false,
+	@ModifyArg(method = "render",
 					at = @At(value = "INVOKE",
-									target = "Lnet/minecraft/client/gui/ResourceLoadProgressGui;func_238467_a_(Lcom/mojang/blaze3d/matrix/MatrixStack;IIIII)V"),index = 5)
+									target = "Lnet/minecraft/client/gui/ResourceLoadProgressGui;fill(Lcom/mojang/blaze3d/matrix/MatrixStack;IIIII)V"),index = 5)
 	private int backgroundColor(int old){
 		return Hooks.backgroundColor | old << 24;
 	}
 
-	@ModifyArgs(method = "func_230430_a_",at = @At(value = "INVOKE",target = "Lcom/mojang/blaze3d/systems/RenderSystem;color4f(FFFF)V"))
+	@ModifyArgs(method = "render",at = @At(value = "INVOKE",target = "Lcom/mojang/blaze3d/systems/RenderSystem;color4f(FFFF)V"))
 	private void tintLogo(Args args){
 		float r = (Hooks.logoColor >> 16 & 0xff)/255f;
 		float g = (Hooks.logoColor >> 8 & 0xff)/255f;
